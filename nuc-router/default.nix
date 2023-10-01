@@ -39,6 +39,8 @@
       # Install hello world package
       pkgs.hello
     ];
+
+    system.stateVersion = "23.05";
   };
   out = lib.nixosSystem {
     inherit system;
