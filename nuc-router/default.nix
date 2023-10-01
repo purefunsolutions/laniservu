@@ -50,6 +50,15 @@
       htop
       iftop
       iotop
+
+      wget
+      curl
+
+      ripgrep
+      git
+
+      screen
+      tmux
     ];
 
     services.openssh.enable = true;
