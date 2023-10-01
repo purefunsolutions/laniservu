@@ -38,9 +38,11 @@
       "i915"
     ];
 
-    environment.systemPackages = [
-      # Install hello world package
-      pkgs.hello
+    environment.systemPackages = with pkgs; [
+      # Basic "top"s
+      htop
+      iftop
+      iotop
     ];
 
     services.openssh.enable = true;
