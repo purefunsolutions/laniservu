@@ -32,6 +32,7 @@
 
     nixpkgs.config.allowUnfree = true;
     hardware.enableAllFirmware = true;
+    hardware.cpu.intel.updateMicrocode = true;
 
     boot.loader = {
       efi.canTouchEfiVariables = true;
@@ -43,6 +44,10 @@
 
       # Early KMS
       "i915"
+    ];
+    boot.kernelModules = [
+      # KVM
+      "kvm-intel"
     ];
 
     programs = {
@@ -67,6 +72,23 @@
       screen
       tmux
     ];
+
+    nix = {
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+      optimise = {
+        automatic = true;
+        dates = ["3:00" "11:00" "15:00"];
+      };
+      settings = {
+        trusted-users = ["root" "@wheel"];
+        auto-optimise-store = true;
+        experimental-features = ["nix-command" "flakes"];
+      };
+    };
 
     services.openssh.enable = true;
     users.users.root.openssh.authorizedKeys.keys = [
