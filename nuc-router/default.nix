@@ -118,6 +118,7 @@
       22 # SSH
     ];
     networking.firewall.interfaces."ethlan0".allowedUDPPorts = [
+      53 # DNS Server
       67 # DHCP Server
     ];
 
