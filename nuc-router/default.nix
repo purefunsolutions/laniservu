@@ -28,8 +28,6 @@
     # Make it explicit we are building for x86_64
     nixpkgs.hostPlatform.system = system;
 
-    # TODO: Add stuff from nixos-generate-config
-
     nixpkgs.config.allowUnfree = true;
     hardware.enableAllFirmware = true;
     hardware.cpu.intel.updateMicrocode = true;
@@ -151,28 +149,24 @@
         # }
       ];
     };
-    services.dhcpd4 = {
+    services.dnsmasq = {
       enable = true;
-      interfaces = ["ethlan0"]; # Only serve DHCP addresses towards LAN
-      authoritative = true;
-      machines = [
-        {
-          hostName = "bf";
-          ipAddress = "10.42.0.42";
-          ethernetAddress = "2c:f0:5d:54:49:17";
-        }
-      ];
-      extraConfig = ''
-        option domain-name-servers 8.8.8.8;
-        option subnet-mask 255.255.0.0;
+      settings = {
+        domain-needed = true;
+        bogus-priv = true;
+        expand-hosts = true;
+        bind-interfaces = true;
+        listen-address = "10.42.0.1";
+        interface = "ethlan0";
+        except-interface = ["ethwan0" "wlan0"];
+        dhcp-range = ["10.42.0.200,10.42.255.254,336h"];
 
-        subnet 10.42.0.0 netmask 255.255.0.0 {
-          option broadcast-address 10.42.255.255;
-          option routers 10.42.0.1;
-          interface ethlan0;
-          range 10.42.0.200 10.42.255.254;
-        }
-      '';
+        local = "/lan/";
+        domain = "lan";
+
+        # Static IPs
+        dhcp-host = ["2c:f0:5d:54:49:17,10.42.0.42"];
+      };
     };
   };
   outCfg = lib.nixosSystem {
