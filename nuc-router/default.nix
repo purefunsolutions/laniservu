@@ -18,6 +18,10 @@
 
     networking.hostName = "nuc-router";
 
+    time.timeZone = "Europe/Helsinki";
+    i18n.defaultLocale = "en_US.UTF-8";
+    console.keyMap = "fi";
+
     # Make it explicit we are building for x86_64
     nixpkgs.hostPlatform.system = system;
 
