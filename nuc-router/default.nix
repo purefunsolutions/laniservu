@@ -164,9 +164,9 @@
       ];
       extraConfig = ''
         option domain-name-servers 8.8.8.8;
-        option subnet-mask 255.255.255.0;
+        option subnet-mask 255.255.0.0;
 
-        subnet 10.42.0.0 netmask 255.255.255.0 {
+        subnet 10.42.0.0 netmask 255.255.0.0 {
           option broadcast-address 10.42.255.255;
           option routers 10.42.0.1;
           interface ethlan0;
