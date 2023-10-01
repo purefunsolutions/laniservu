@@ -14,7 +14,6 @@
     ...
   }: {
     imports = [
-      nixos-generators.nixosModules.raw-efi
     ];
 
     networking.hostName = "nuc-router";
@@ -27,6 +26,10 @@
     nixpkgs.config.allowUnfree = true;
     hardware.enableAllFirmware = true;
 
+    boot.loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
     boot.initrd.kernelModules = [
       # Load NVMe kernel module early in case we have been installed to NVMe
       "nvme"
@@ -40,13 +43,30 @@
       pkgs.hello
     ];
 
+    services.openssh.enable = true;
+    users.users.root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPV/Kqv9FCXg5CIzUNDRvjCNXhcBCtWXqg8MJpaBI3xN a@b"
+    ];
+
     system.stateVersion = "23.05";
   };
-  out = lib.nixosSystem {
+  outCfg = lib.nixosSystem {
     inherit system;
-    modules = [nixosConfiguration];
+    modules = [
+      nixosConfiguration
+
+      ./hardware-configuration.nix
+    ];
+  };
+  outImage = lib.nixosSystem {
+    inherit system;
+    modules = [
+      nixosConfiguration
+
+      nixos-generators.nixosModules.raw-efi
+    ];
   };
 in {
-  nixosConfigurations.nuc-router = out;
-  packages.x86_64-linux.nuc-router-image = out.config.system.build.${out.config.formatAttr};
+  nixosConfigurations.nuc-router = outCfg;
+  packages.x86_64-linux.nuc-router-image = outImage.config.system.build.${outImage.config.formatAttr};
 }

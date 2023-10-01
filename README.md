@@ -12,3 +12,8 @@ with something like:
 `dd if=result-nuc-router/nixos.img of=/dev/<DISK> bs=32M status=progress`.
 (Beware that you use right disk for `of=` parameter so you don't overwrite your
 hard disk!)
+
+## Quickly switch running configuration on remotely running NUC router
+
+Run:
+`nixos-rebuild --flake .#nuc-router --target-host root@nuc-router --fast boot`
