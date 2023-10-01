@@ -16,9 +16,6 @@
     config,
     ...
   }: {
-    imports = [
-    ];
-
     networking.hostName = "nuc-router";
 
     time.timeZone = "Europe/Helsinki";
