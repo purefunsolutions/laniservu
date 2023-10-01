@@ -7,6 +7,9 @@
   microvm,
 }: let
   system = "x86_64-linux";
+  externalMac = "48:21:0b:56:50:4f";
+  wlanMac = "74:04:f1:62:0e:c1";
+  internalMac = "48:21:0b:56:3c:2a";
   nixosConfiguration = {
     lib,
     pkgs,
