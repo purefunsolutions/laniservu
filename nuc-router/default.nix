@@ -45,6 +45,13 @@
       "i915"
     ];
 
+    programs = {
+      mosh.enable = true;
+      neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
+    };
     environment.systemPackages = with pkgs; [
       # Basic "top"s
       htop
