@@ -177,6 +177,8 @@
       nixosConfiguration
 
       ./hardware-configuration.nix
+
+      ./wireguard.nix
     ];
   };
   outImage = lib.nixosSystem {
