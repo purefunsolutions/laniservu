@@ -88,6 +88,7 @@
     services.openssh.enable = true;
     users.users.root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPV/Kqv9FCXg5CIzUNDRvjCNXhcBCtWXqg8MJpaBI3xN a@b"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtV+yN0RzLzhFPE2DZ8IlT28eDu4H13KGjHRxm+uAuD a@b"
     ];
 
     system.stateVersion = "23.05";
