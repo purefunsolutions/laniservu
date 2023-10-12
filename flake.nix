@@ -15,6 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    lancache.url = "github:boffbowsh/nix-lancache";
   };
 
   outputs = {
@@ -24,6 +25,7 @@
     nixos-generators,
     nixos-hardware,
     microvm,
+    lancache,
   }: let
     lib = nixpkgs.lib;
     systems = with flake-utils.lib.system; [
@@ -39,6 +41,16 @@
       }))
 
       # NUC router
-      (import ./nuc-router {inherit self lib nixpkgs nixos-generators nixos-hardware microvm;})
+      (import ./nuc-router {
+        inherit
+          self
+          lib
+          nixpkgs
+          nixos-generators
+          nixos-hardware
+          microvm
+          lancache
+          ;
+      })
     ];
 }

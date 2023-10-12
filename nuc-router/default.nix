@@ -5,6 +5,7 @@
   nixos-generators,
   nixos-hardware,
   microvm,
+  lancache,
 }: let
   system = "x86_64-linux";
   externalMac = "48:21:0b:56:50:4f";

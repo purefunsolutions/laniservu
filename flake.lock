@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cache-domains": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662045619,
+        "narHash": "sha256-Qfwu2ZDvMrrVOzN54r2VserP+ezJVZ7Y8efHb/1tG2c=",
+        "owner": "uklans",
+        "repo": "cache-domains",
+        "rev": "257f009282afb1d9816e21bf09cb10812fc2b4c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "uklans",
+        "repo": "cache-domains",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -15,6 +31,25 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "lancache": {
+      "inputs": {
+        "cache-domains": "cache-domains",
+        "monolithic": "monolithic"
+      },
+      "locked": {
+        "lastModified": 1677794256,
+        "narHash": "sha256-+aRLWcdTwhijFhMPG6rfTfIv/lJC81P/gXunPja5bss=",
+        "owner": "boffbowsh",
+        "repo": "nix-lancache",
+        "rev": "b75f2ab516a652c2ec747410c23656cd078a4bfd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "boffbowsh",
+        "repo": "nix-lancache",
         "type": "github"
       }
     },
@@ -38,6 +73,22 @@
       "original": {
         "owner": "astro",
         "repo": "microvm.nix",
+        "type": "github"
+      }
+    },
+    "monolithic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668255020,
+        "narHash": "sha256-+94O6pgxVVOZZ3imlrf/hywBSY9g/LFwBer1KST6iPE=",
+        "owner": "lancachenet",
+        "repo": "monolithic",
+        "rev": "a45516468d9dd5dd7b96cdf311c07adb472c4e7f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lancachenet",
+        "repo": "monolithic",
         "type": "github"
       }
     },
@@ -111,6 +162,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "lancache": "lancache",
         "microvm": "microvm",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
