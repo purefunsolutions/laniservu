@@ -92,6 +92,19 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtV+yN0RzLzhFPE2DZ8IlT28eDu4H13KGjHRxm+uAuD a@b"
     ];
 
+    users.users.cs2 = {
+      isNormalUser = true;
+      packages = with pkgs; [
+        steamcmd
+        tmux
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPV/Kqv9FCXg5CIzUNDRvjCNXhcBCtWXqg8MJpaBI3xN a@b"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICtV+yN0RzLzhFPE2DZ8IlT28eDu4H13KGjHRxm+uAuD a@b"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOyTQaDUuQBEUKR6Q8JAiF2KNsf5W768W+t/VHZmnptb k@L"
+      ];
+    };
+
     system.stateVersion = "23.05";
 
     # Networking configuration
@@ -115,10 +128,20 @@
     networking.firewall.enable = true;
     networking.firewall.allowedTCPPorts = [
       22 # SSH
+
+      # SRCDS
+      27015
     ];
     networking.firewall.interfaces."ethlan0".allowedUDPPorts = [
       53 # DNS Server
       67 # DHCP Server
+
+      # SRCDS
+      27015
+      27020
+      27005
+      26900
+      51840
     ];
 
     # Use DHCP to get external IP address
@@ -147,6 +170,42 @@
         #   destination = "10.0.0.12:12001";
         #   proto = "udp";
         # }
+        # Mordhau Query Port TCP
+        {
+          sourcePort = 27018;
+          destination = "10.42.0.30:27018";
+          proto = "tcp";
+        }
+        # Mordhau Query Port UDP
+        {
+          sourcePort = 27018;
+          destination = "10.42.0.30:27018";
+          proto = "udp";
+        }
+        # Mordhau Beacon Port TCP
+        {
+          sourcePort = 15002;
+          destination = "10.42.0.30:15002";
+          proto = "tcp";
+        }
+        # Mordhau Beacon Port UDP
+        {
+          sourcePort = 15002;
+          destination = "10.42.0.30:15002";
+          proto = "udp";
+        }
+        # Mordhau lispaska TCP
+        {
+          sourcePort = 7779;
+          destination = "10.42.0.30:7779";
+          proto = "tcp";
+        }
+        # Mordhau lispaska UDP
+        {
+          sourcePort = 7779;
+          destination = "10.42.0.30:7779";
+          proto = "udp";
+        }
       ];
     };
     services.dnsmasq = {
@@ -169,6 +228,9 @@
           "2c:f0:5d:54:49:17,10.42.0.42"
           "f8:e4:3b:09:e4:b2,10.42.0.43"
           "5c:e9:1e:86:88:2f,10.42.0.44"
+
+          # Fujitsu Laptop Server
+          "c4:7d:46:1b:5b:f1,10.42.0.30"
         ];
       };
     };
